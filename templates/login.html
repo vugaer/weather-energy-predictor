@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Eclipse</title>
+</head>
+<body style="font-family: Arial, sans-serif; background-color: #f2f2f2; margin: 0; padding: 0;">
+    <div style="text-align: center; margin-top: 20px;">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="Eclipse Logo" style="width: 100px; height: auto;">
+        <h1 style="font-size: 24px; color: #333; margin-top: 10px;">Eclipse</h1>
+    </div>
+    <div style="max-width: 400px; margin: 20px auto; padding: 20px; background-color: #fff; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+        <h2 style="text-align: center; color: #333;">Login</h2>
+        <form method="POST" style="display: flex; flex-direction: column;">
+            <label for="username" style="margin-top: 10px; font-weight: bold;">Username:</label>
+            <input type="text" id="username" name="username" required style="padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px;">
+            <label for="password" style="margin-top: 10px; font-weight: bold;">Password:</label>
+            <input type="password" id="password" name="password" required style="padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px;">
+            <button type="submit" style="padding: 10px; margin-top: 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Login</button>
+        </form>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div style="color: red; text-align: center; margin-top: 10px;">{{ messages[0] }}</div>
+        {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>
