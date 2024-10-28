@@ -1,3 +1,7 @@
 Flask 
 Gunicorn
 xgboost
+pandas
+numpy
+datetime
+pickle
