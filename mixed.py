@@ -16,7 +16,7 @@ def fetch_weather_data(latitude, longitude, api_key='7ad5ad710b31461d82710415924
     return data
 
 # Combined function to predict current or tomorrow's weather
-def predict_weather(latitude, longitude, period='current', hour=None, model_path='./best_xgboost_model.pkl'):
+def predict_weather(latitude, longitude, period='current', hour=None, model_path=r"D:\weathehere\xgboost_model.pkl"):
     with open(model_path, 'rb') as model_file:
         model = pickle.load(model_file)  # Load your model
 
@@ -83,12 +83,12 @@ BAKU_LONGITUDE = 49.8671
 # # Predict tomorrow's weather at 8 AM
 # print("Tomorrow's Weather Prediction at 8 AM:", predict_weather(BAKU_LATITUDE, BAKU_LONGITUDE, period='tomorrow', hour=8))
 # Function to calculate power values based on weather predictions
-def calculate_power_values(period='current'):
+def calculate_power_values(period='current', latitude, longtitude):
     power_values = []
     weather_values = []
 
     for i in range(0, 25, 8):
-        prediction = predict_weather(BAKU_LATITUDE, BAKU_LONGITUDE, hour=i, period=period)
+        prediction = predict_weather(latitude, longtitude, hour=i, period=period)
         weather_values.append(float(prediction[0]))
     for j in range(len(weather_values) - 1):
         power_value = 4 * (weather_values[j] + weather_values[j + 1])
@@ -97,5 +97,5 @@ def calculate_power_values(period='current'):
     return power_values
 
 # Main calculation and output
-current_values = calculate_power_values(period='current')
-tomorrow_values = calculate_power_values(period='tomorrow')
+current_values = calculate_power_values(period='current', latitude, longtitude)
+tomorrow_values = calculate_power_values(period='tomorrow', latitude, longtitude)
