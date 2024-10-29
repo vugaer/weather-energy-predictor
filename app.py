@@ -8,7 +8,11 @@ app.secret_key = secrets.token_hex(16)
 # Login credentials
 USERNAME = 'demo'
 PASSWORD = '12345'
-
+@app.route('/account')
+def account():
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+    return render_template('account.html')
 @app.route('/', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -16,7 +20,7 @@ def login():
         password = request.form['password']
         if username == USERNAME and password == PASSWORD:
             session['logged_in'] = True
-            return redirect(url_for('dashboard'))
+            return redirect(url_for('account'))  # Redirect to account page
         else:
             flash("Either username or password is incorrect.")
     return render_template('login.html')
@@ -44,6 +48,11 @@ def dashboard():
 def logout():
     session.pop('logged_in', None)
     return redirect(url_for('login'))
+@app.route('/wind')
+def wind():
+    if not session.get('logged_in'):
+        return redirect(url_for('login'))
+    return render_template('wind.html')
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True,port="80")
