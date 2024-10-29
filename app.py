@@ -36,8 +36,8 @@ def dashboard():
         latitude = request.form['latitude']
         longitude = request.form['longitude']
         
-        current_values = mixed.calculate_power_values(period='current', latitude, longitude)
-        tomorrow_values = mixed.calculate_power_values(period='tomorrow', latitude, longitude)
+        current_values = mixed.calculate_power_values(latitude, longitude, period='current')
+        tomorrow_values = mixed.calculate_power_values(latitude, longitude, period='tomorrow')
         current_sum = sum(current_values)
         tomorrow_sum = sum(tomorrow_values)
 
