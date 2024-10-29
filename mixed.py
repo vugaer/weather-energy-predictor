@@ -16,7 +16,7 @@ def fetch_weather_data(latitude, longitude, api_key='7ad5ad710b31461d82710415924
     return data
 
 # Combined function to predict current or tomorrow's weather
-def predict_weather(latitude, longitude, period='current', hour=None, model_path='archive/custom_ml/best_xgboost_model.pkl'):
+def predict_weather(latitude, longitude, period='current', hour=None, model_path='./best_xgboost_model.pkl'):
     with open(model_path, 'rb') as model_file:
         model = pickle.load(model_file)  # Load your model
 
