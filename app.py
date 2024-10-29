@@ -37,7 +37,7 @@ def dashboard():
         current_sum = sum(current_values)
         tomorrow_sum = sum(tomorrow_values)
 
-    return render_template('account.html', current_values=current_values, tomorrow_values=tomorrow_values,
+    return render_template('dashboard.html', current_values=current_values, tomorrow_values=tomorrow_values,
                            current_sum=current_sum, tomorrow_sum=tomorrow_sum)
 
 @app.route('/logout')
