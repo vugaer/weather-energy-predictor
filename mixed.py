@@ -97,5 +97,5 @@ def calculate_power_values(period='current', latitude, longtitude):
     return power_values
 
 # Main calculation and output
-current_values = calculate_power_values(period='current', latitude, longtitude)
-tomorrow_values = calculate_power_values(period='tomorrow', latitude, longtitude)
+# current_values = calculate_power_values(period='current', latitude, longtitude)
+# tomorrow_values = calculate_power_values(period='tomorrow', latitude, longtitude)
