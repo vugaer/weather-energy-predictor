@@ -4,57 +4,149 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Eclipse</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #e6e6e6;
+            color: #444;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header, .content {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .header img {
+            width: 80px;
+            height: auto;
+        }
+
+        .header h1 {
+            font-size: 26px;
+            color: #333;
+            margin: 10px 0;
+        }
+
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .form-container label {
+            margin-top: 15px;
+            font-weight: 600;
+            color: #444;
+        }
+
+        .form-container input {
+            padding: 12px;
+            margin-top: 5px;
+            border: 1px solid #bbb;
+            border-radius: 5px;
+        }
+
+        .form-container button {
+            padding: 12px;
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .form-container button:hover {
+            background-color: #388E3C;
+        }
+
+        .table-container {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .table-container th, .table-container td {
+            padding: 12px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+
+        .table-container th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .logout {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .logout a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 600;
+        }
+    </style>
 </head>
-<body style="font-family: Arial, sans-serif; background-color: #f2f2f2; margin: 0; padding: 0;">
-    <div style="text-align: center; margin-top: 20px;">
-        <img src="{{ url_for('static', filename='logo.png') }}" alt="Eclipse Logo" style="width: 100px; height: auto;">
-        <h1 style="font-size: 24px; color: #333; margin-top: 10px;">Eclipse</h1>
+<body>
+    <div class="header" style="text-align: center;">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="Eclipse Logo">
+        <h1>Eclipse</h1>
     </div>
-    <div style="max-width: 800px; margin: 20px auto; padding: 20px; background-color: #fff; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+    <div class="content">
         <h2 style="text-align: center; color: #333;">Dashboard</h2>
-        <form method="POST" style="display: flex; flex-direction: column;">
-            <label for="latitude" style="margin-top: 10px; font-weight: bold;">Latitude:</label>
-            <input type="text" id="latitude" name="latitude" required style="padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px;">
-            <label for="longitude" style="margin-top: 10px; font-weight: bold;">Longitude:</label>
-            <input type="text" id="longitude" name="longitude" required style="padding: 10px; margin-top: 5px; border: 1px solid #ccc; border-radius: 5px;">
-            <button type="submit" style="padding: 10px; margin-top: 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px; cursor: pointer;">Generate</button>
+        <form class="form-container" method="POST">
+            <label for="latitude">Latitude:</label>
+            <input type="text" id="latitude" name="latitude" required>
+            <label for="longitude">Longitude:</label>
+            <input type="text" id="longitude" name="longitude" required>
+            <button type="submit">Generate</button>
         </form>
         {% if current_values and tomorrow_values %}
-            <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+            <table class="table-container">
                 <thead>
                     <tr>
-                        <th style="padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2; font-weight: bold;">Time Period</th>
-                        <th style="padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2; font-weight: bold;">Today's Generated Power</th>
-                        <th style="padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2; font-weight: bold;">Tomorrow's Generated Power</th>
+                        <th>Time Period (12h)</th>
+                        <th>Today's Generated Power (KW)</th>
+                        <th>Power Generation Forecast for Tomorrow (KW)</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">0am - 8am</td>
-                        <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">{{ current_values[0] }}</td>
-                        <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">{{ tomorrow_values[0] }}</td>
+                        <td>0am - 8am</td>
+                        <td>{{ current_values[0] }}</td>
+                        <td>{{ tomorrow_values[0] }}</td>
                     </tr>
                     <tr>
-                        <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">8am - 4pm</td>
-                        <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">{{ current_values[1] }}</td>
-                        <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">{{ tomorrow_values[1] }}</td>
+                        <td>8am - 4pm</td>
+                        <td>{{ current_values[1] }}</td>
+                        <td>{{ tomorrow_values[1] }}</td>
                     </tr>
                     <tr>
-                        <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">4pm - 12am</td>
-                        <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">{{ current_values[2] }}</td>
-                        <td style="padding: 10px; border: 1px solid #ddd; text-align: center;">{{ tomorrow_values[2] }}</td>
+                        <td>4pm - 12am</td>
+                        <td>{{ current_values[2] }}</td>
+                        <td>{{ tomorrow_values[2] }}</td>
                     </tr>
                     <tr>
-                        <td style="padding: 10px; border: 1px solid #ddd; text-align: center; font-weight: bold;">Total</td>
-                        <td style="padding: 10px; border: 1px solid #ddd; text-align: center; font-weight: bold;">{{ current_sum }}</td>
-                        <td style="padding: 10px; border: 1px solid #ddd; text-align: center; font-weight: bold;">{{ tomorrow_sum }}</td>
+                        <td><strong>Total (KW)</strong></td>
+                        <td><strong>{{ current_sum }}</strong></td>
+                        <td><strong>{{ tomorrow_sum }}</strong></td>
                     </tr>
                 </tbody>
             </table>
         {% endif %}
     </div>
-    <div style="text-align: center; margin-top: 20px;">
-        <a href="{{ url_for('logout') }}" style="color: #333; text-decoration: none; font-weight: bold;">Logout</a>
+    <div class="logout">
+        <a href="{{ url_for('logout') }}">Logout</a>
     </div>
 </body>
 </html>
