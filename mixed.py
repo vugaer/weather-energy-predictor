@@ -83,7 +83,7 @@ BAKU_LONGITUDE = 49.8671
 # # Predict tomorrow's weather at 8 AM
 # print("Tomorrow's Weather Prediction at 8 AM:", predict_weather(BAKU_LATITUDE, BAKU_LONGITUDE, period='tomorrow', hour=8))
 # Function to calculate power values based on weather predictions
-def calculate_power_values(period='current', latitude, longtitude):
+def calculate_power_values(latitude, longtitude, period='current'):
     power_values = []
     weather_values = []
 
