@@ -5,7 +5,7 @@ import requests
 from datetime import datetime
 
 # Function to fetch weather data from WeatherAPI
-def fetch_weather_data(latitude, longitude, api_key='7ad5ad710b31461d827104159242710', forecast=False):
+def fetch_weather_data(latitude, longitude, api_key='', forecast=False):
     if forecast:
         url = f"http://api.weatherapi.com/v1/forecast.json?key={api_key}&q={latitude},{longitude}&days=2&aqi=no&alerts=no"
     else:
